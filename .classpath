@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/dragoonage/Downloads/OMDB (1)/OMDB/libs/json-20141113.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dragoonage/Downloads/OMDB (1)/OMDB/libs/owlapi-distribution-3.4.10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dragoonage/Downloads/commons-csv-1.5-bin/commons-csv-1.5/commons-csv-1.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dragoonage/Downloads/commons-csv-1.5-bin/commons-csv-1.5/commons-csv-1.5-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dragoonage/Downloads/SparqlClient/lib/arq-2.8.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dragoonage/Downloads/SparqlClient/lib/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dragoonage/Downloads/SparqlClient/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dragoonage/Downloads/SparqlClient/lib/httpclient-4.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dragoonage/Downloads/SparqlClient/lib/httpcore-4.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dragoonage/Downloads/SparqlClient/lib/httpmime-4.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dragoonage/Downloads/SparqlClient/lib/jena-2.6.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dragoonage/Downloads/SparqlClient/lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dragoonage/Downloads/SparqlClient/lib/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
