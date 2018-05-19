@@ -9,7 +9,8 @@ public class OMDB {
 	
 	public static void main(String args[])
    {
-     OMDBProxy omdbProxy = new OMDBProxy();
+	System.out.println("IMDB........................................");
+	OMDBProxy omdbProxy = new OMDBProxy();
      System.out.println(omdbProxy.getMovieInfos("the artist").get("imdbRating"));
    
    }

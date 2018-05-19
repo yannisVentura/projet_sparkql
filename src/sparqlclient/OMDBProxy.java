@@ -15,7 +15,7 @@ import org.json.JSONObject; // penser à rajouter la bibliothèque json-20141113
 public class OMDBProxy {
 	public static final String OMDBKEY = "85c498d8";
 
-	private String baseUrl = "http://www.omdbapi.com/?y=&plot=short&r=json&t=";//base de l'url correspondant à la requête get qui devra être compléter avec le nom du film à considérer
+	private String baseUrl = "http://www.omdbapi.com/?apikey=85c498d8&?y=&plot=short&r=json&t=";//base de l'url correspondant à la requête get qui devra être compléter avec le nom du film à considérer
 	
 	public OMDBProxy()
 	{
@@ -41,11 +41,10 @@ public class OMDBProxy {
 	            result += line;
 	         }
 	         rd.close();
-	         
          JSONObject obj = new JSONObject(result);
          for(String key : obj.keySet())
          {
-        	 String val = obj.getString(key);
+        	 String val = obj.get(key).toString();
         	 ret.put(key, val);
          }
 	         
