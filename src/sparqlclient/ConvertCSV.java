@@ -23,7 +23,7 @@ public class ConvertCSV {
 			request.append(":R" + iLine + " rdfs:label \"" + record.get("realisateur") + "\".\n");
 			iLine++;
 		}
-		request.append("}\nWHERE {\n?real rdfs:label \"a pour r�alisateur\"@fr.\n}");
+		request.append("}\nWHERE {\n?real rdfs:label \"a pour réalisateur\"@fr.\n}");
 		return request.toString();
 	}
 	
@@ -40,7 +40,22 @@ public class ConvertCSV {
 			request.append(":A" + iLine + " rdfs:label \"" + record.get("adresse") + "\".\n");
 			iLine++;
 		}
-		request.append("}\nWHERE {\n?real rdfs:label \"se d�roule �\"@fr.\n}");
+		request.append("}\nWHERE {\n?real rdfs:label \"se déroule à\"@fr.\n}");
+		return request.toString();
+	}
+
+	public static String OMDB(String movieTitle, String year)
+	{		
+		OMDBProxy omdb = new  OMDBProxy();
+		omdb.getMovieInfos(movieTitle, Integer.parseInt(year));
+		StringBuffer request = new StringBuffer();
+
+		request.append(PREFIX +"INSERT { \n");
+
+			request.append(":F ?duree 😀.\n");
+			request.append("😀 rdfs:label \"" + omdb.getRuntime() + "\".\n");
+
+		request.append("}\nWHERE {\n?duree rdfs:label \"a pour durée\"@fr.\n}");
 		return request.toString();
 	}
 }

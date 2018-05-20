@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -15,7 +14,7 @@ import org.json.JSONObject; // penser à rajouter la bibliothèque json-20141113
 public class OMDBProxy {
 	public static final String OMDBKEY = "85c498d8";
 
-	private String baseUrl = "http://www.omdbapi.com/?apikey=85c498d8&?y=&plot=short&r=json&t=";//base de l'url correspondant à la requête get qui devra être compléter avec le nom du film à considérer
+	private String baseUrl = "http://www.omdbapi.com/?apikey=85c498d8&?plot=short&r=json";//base de l'url correspondant à la requête get qui devra être compléter avec le nom du film à considérer
 	
 	public OMDBProxy()
 	{
@@ -23,7 +22,7 @@ public class OMDBProxy {
 	}
 	
 	
-	public HashMap<String, String> getMovieInfos(String movieTitle)
+	public HashMap<String, String> getMovieInfos(String movieTitle, int year)
 	{ //permet pour un titre de film de récupérer un hachage contenant les couples (propriété du film / valeur) retournés par OMDB
 		HashMap<String, String> ret = new HashMap<>();
 		
@@ -33,7 +32,7 @@ public class OMDBProxy {
 	      String line;
 	      String result = "";
 	      try {
-	         url = new URL(this.baseUrl+URLEncoder.encode(movieTitle, "UTF-8"));
+	         url = new URL(this.baseUrl + "&t=" + URLEncoder.encode(movieTitle, "UTF-8") + "&y=" + year);
 	         conn = (HttpURLConnection) url.openConnection();
 	         conn.setRequestMethod("GET");
 	         rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -56,6 +55,12 @@ public class OMDBProxy {
 	      }
 		
 		return ret;
+	}
+
+
+	public String getRuntime() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
