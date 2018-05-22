@@ -12,17 +12,16 @@ import org.json.JSONObject; // penser à rajouter la bibliothèque json-20141113
 
 
 public class OMDBProxy {
-	public static final String OMDBKEY = "85c498d8";
-
-	private String baseUrl = "http://www.omdbapi.com/?apikey=85c498d8&?plot=short&r=json";//base de l'url correspondant à la requête get qui devra être compléter avec le nom du film à considérer
+	private final String OMDBKEY = "85c498d8";
+	private final String baseUrl = "http://www.omdbapi.com/?apikey=" + OMDBKEY + "&plot=short&r=json";//base de l'url correspondant à la requête get qui devra être compléter avec le nom du film à considérer
 	
 	public OMDBProxy()
 	{
 		
 	}
+	private HashMap<String, String> movieInfos;
 	
-	
-	public HashMap<String, String> getMovieInfos(String movieTitle, int year)
+	public boolean loadMovieInfos(String movieTitle, int year)
 	{ //permet pour un titre de film de récupérer un hachage contenant les couples (propriété du film / valeur) retournés par OMDB
 		HashMap<String, String> ret = new HashMap<>();
 		
@@ -33,6 +32,7 @@ public class OMDBProxy {
 	      String result = "";
 	      try {
 	         url = new URL(this.baseUrl + "&t=" + URLEncoder.encode(movieTitle, "UTF-8") + "&y=" + year);
+	         System.out.println(this.baseUrl + "&t=" + URLEncoder.encode(movieTitle, "UTF-8") + "&y=" + year);
 	         conn = (HttpURLConnection) url.openConnection();
 	         conn.setRequestMethod("GET");
 	         rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -43,7 +43,7 @@ public class OMDBProxy {
          JSONObject obj = new JSONObject(result);
          for(String key : obj.keySet())
          {
-        	 String val = obj.get(key).toString();
+        	 String val = new String(obj.get(key).toString().getBytes(), "UTF-8");
         	 ret.put(key, val);
          }
 	         
@@ -54,13 +54,63 @@ public class OMDBProxy {
 	         e.printStackTrace();
 	      }
 		
-		return ret;
+		movieInfos = ret;
+		return !movieInfos.containsKey("Error");
+		
 	}
 
-
-	public String getRuntime() {
-		// TODO Auto-generated method stub
-		return null;
+	public int getRuntime() {
+		
+		try
+		{
+			String runtime = movieInfos.get("Runtime").split(" ")[0];
+			return Integer.parseInt(runtime);
+		}
+		catch (Exception e)
+		{
+			return 0;
+		}
 	}
 	
+	public String[] getActors()
+	{	
+		return movieInfos.get("Actors").split(",");
+	}
+	
+	public String[] getGenres()
+	{	
+		return movieInfos.get("Genre").split(",");
+	}
+	
+	public String getBudget()
+	{
+		return movieInfos.get("BoxOffice");
+	}
+	
+	public String getPlot()
+	{	
+		return movieInfos.get("Plot");
+	}
+	
+	public String[] getPays()
+	{	
+		return movieInfos.get("Country").split(",");
+	}
+	
+	public float getNote()
+	{
+		try
+		{
+			return Float.parseFloat(movieInfos.get("imdbRating"));
+		}
+		catch (Exception e)
+		{
+			return 0;
+		}
+	}
+	
+	public String getImdbID()
+	{
+		return movieInfos.get("imdbID");
+	}
 }
